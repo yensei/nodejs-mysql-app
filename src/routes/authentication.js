@@ -17,7 +17,7 @@ router.post('/signup', (req, res) => {
     res.send('received');
 });
 */
-router.post('/signup', passport.authenticate('local', {
+router.post('/signup', passport.authenticate('local.signup', {
     successRedirect:'/profile',
     failureRedirect:'/signup',
     failureFlash:true
