@@ -18,7 +18,7 @@ pool.getConnection((err, connection) => {
       case "EHOSTUNREACH":
         msg += "DATABASE HOST UNREACHEABLE; \n";
       case "ER_ACCESS_DENIED_ERROR":
-        msg += "ACCESS DENIED TO BD 'links'";
+        msg += "ACCESS DENIED TO BD 'links' \n";
       default:
         if (msg.length == 0) {
           msg = "code: " + err.code + "\n details: " + err.message;
