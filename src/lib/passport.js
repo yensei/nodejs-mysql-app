@@ -9,7 +9,6 @@ passport.use('local', new strategy({
    passwordField: 'password',
    passReqToCallback: true
 }, async (req, username, password, done) => {
-  
    const { fullname } = req.body;
 
    let newUser = {
@@ -17,11 +16,17 @@ passport.use('local', new strategy({
       password,
       fullname
    };
-   newUser.password = await helpers.encryptPassword(password);
-   const result = await pool.query('INSERT INTO users SET ?', [newUser]);
-   newUser.id = result.insertId;
+  try{
+     newUser.password = await helpers.encryptPassword(password);
+     const result = await pool.query('INSERT INTO users SET ?', [newUser]);
+     newUser.id = result.insertId;
+
+   }catch(e){
+      console.log(e);
+      
+   }
+   
    return done(null, newUser);
-  
   
 }));
 
